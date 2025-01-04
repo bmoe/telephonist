@@ -22,6 +22,14 @@ defmodule Telephonist.Logger do
   end
 
   @doc false
+  def child_spec(_) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, []}
+    }
+  end
+
+  @doc false
   def handle_event({:processing, {_, twilio, _} = params}, _state) do
     log twilio["CallSid"], "Processing: #{inspect params}"
   end

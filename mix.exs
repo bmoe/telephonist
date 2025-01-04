@@ -4,16 +4,16 @@ defmodule Telephonist.Mixfile do
   def project do
     [app: :telephonist,
      version: "1.0.0-pre",
-     elixir: "~> 1.0",
+     elixir: "~> 1.11",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps,
-     docs: docs,
-     package: package]
+     deps: deps(),
+     docs: docs(),
+     package: package()]
   end
 
   def application do
-    [applications: [:logger],
+    [extra_applications: [:logger],
      mod: {Telephonist, []}]
   end
 

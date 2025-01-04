@@ -58,6 +58,14 @@ defmodule Telephonist.Event do
                | {:transition_failed, {exception, Call.t, twilio, data}}
 
   @doc false
+  def child_spec(_) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, []}
+    }
+  end
+
+  @doc false
   def start_link do
     GenEvent.start_link(name: __MODULE__)
   end

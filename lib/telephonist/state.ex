@@ -54,6 +54,6 @@ defimpl Inspect, for: Telephonist.State do
     data =
       [state.machine, state.name, state.data, state.twiml]
       |> Enum.join(", ")
-    "#Telephonist.State<#{data}>"
+    "#Telephonist.State<#{inspect data}>"
   end
 end

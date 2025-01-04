@@ -115,9 +115,9 @@ defmodule Telephonist do
     children = [
       # Define workers and child supervisors to be supervised
       # worker(Telephonist.Worker, [arg1, arg2, arg3])
-      worker(Telephonist.Event, []),
-      worker(Telephonist.Logger, []),
-      worker(Telephonist.Storage.ETS, [])
+      Telephonist.Event,
+      Telephonist.Logger,
+      Telephonist.Storage.ETS,
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
