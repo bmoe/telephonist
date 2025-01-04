@@ -58,7 +58,7 @@ defmodule Telephonist.CallProcessor do
   defp find(twilio) do
     sid = twilio["CallSid"]
 
-    case storage.find(sid) do
+    case storage().find(sid) do
       {:ok, call} ->
         notify :call_found, call
         call
@@ -78,7 +78,7 @@ defmodule Telephonist.CallProcessor do
       |> Telephonist.State.complete
 
     :ok = state.machine.on_complete(call, twilio, state.data)
-    storage.delete(call)
+    storage().delete(call)
 
     call = %{call | state: state}
     notify :completed, call
@@ -90,7 +90,7 @@ defmodule Telephonist.CallProcessor do
     state = get_next_state(call, machine, twilio, data)
     call = %{call | state: state}
 
-    storage.save(call)
+    storage().save(call)
     notify :new_state, call
     state
   end

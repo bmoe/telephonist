@@ -7,9 +7,9 @@ defmodule Telephonist.Mixfile do
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps,
-     docs: docs,
-     package: package]
+     deps: deps(),
+     docs: docs(),
+     package: package()]
   end
 
   def application do
@@ -19,10 +19,11 @@ defmodule Telephonist.Mixfile do
 
   defp deps do
     [
-      {:ex_twiml, "~> 2.0"},
+      {:ex_twiml, "~> 2.1.3"},
+      {:poison, "~> 3.0.0", override: true},
       {:inch_ex, ">= 0.0.0", only: :docs},
       {:ex_doc, ">= 0.0.0", only: :docs},
-      {:dogma, ">= 0.0.0", only: [:dev, :test]}
+      {:dogma, ">= 0.1.0", only: [:dev, :test]}
     ]
   end
 
