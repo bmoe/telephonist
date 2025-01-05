@@ -8,6 +8,7 @@ defmodule Telephonist.CallProcessor do
   """
 
   import Telephonist.Event, only: [notify: 2]
+  require Logger
 
   alias Telephonist.Call
 
@@ -87,11 +88,23 @@ defmodule Telephonist.CallProcessor do
 
   # When the call is ongoing
   defp do_processing(call, machine, twilio, data) do
-    state = get_next_state(call, machine, twilio, data)
+    Logger.info("TELE do_processing newly #{inspect call}")
+    state = try do
+      # state = get_next_state(call, machine, twilio, data)
+      get_next_state(call, machine, twilio, data)
+    rescue
+      e ->
+        Logger.error(Exception.format(:error, e, __STACKTRACE__))
+        reraise e, __STACKTRACE__
+    end
+
+    Logger.info("TELE next state #{inspect state}")
     call = %{call | state: state}
 
     storage().save(call)
+    Logger.info("post save")
     notify :new_state, call
+    Logger.info("post notify / #{inspect state}")
     state
   end
 
