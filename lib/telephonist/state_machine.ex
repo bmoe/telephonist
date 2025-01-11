@@ -156,7 +156,7 @@ defmodule Telephonist.StateMachine do
   It should return a new state. If you `use Telephonist.StateMachine`, the
   default implementation will simply re-raise the exception.
   """
-  @callback on_transition_error(map, state_name, twilio, data) :: :ok
+  @callback on_transition_error(map, state_name, twilio, data) :: Telephonist.State.t
 
   ###
   # Macros
