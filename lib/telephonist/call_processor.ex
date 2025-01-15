@@ -7,7 +7,7 @@ defmodule Telephonist.CallProcessor do
   on `Telephonist.StateMachine`.
   """
 
-  import Telephonist.Event, only: [notify: 2]
+  import Telephonist.Logger, only: [notify: 2]
 
   alias Telephonist.Call
 

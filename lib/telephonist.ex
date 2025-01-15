@@ -34,7 +34,7 @@ defmodule Telephonist do
   ## State Machines
 
   State machines are easy to define using the `Telephonist.StateMachine` module.
-  
+
       defmodule CustomCallFlow do
         use Telephonist.StateMachine, initial_state: :choose_language
 
@@ -76,9 +76,9 @@ defmodule Telephonist do
   define state machines.
 
   ## Call Processing
-  
+
   Once you've defined a state machine, it's extremely easy to process calls
-  using it. 
+  using it.
 
       state = Telephonist.CallProcessor.process(CustomCallFlow, twilio, options)
 
@@ -90,20 +90,13 @@ defmodule Telephonist do
 
   - Look up the call based on the `twilio` params in an internal lookup table,
     to determine the state that it's currently in.
-  
+
   - Call the `transition/3` handler on the given StateMachine with the current
     state.
 
   - Save the new state to the lookup table, and return it. It is then the
     responsibility of the calling process to render back `new_state.twiml` to
     Twilio.
-
-  ## Other Topics
-
-  ### Event Broadcasting
-
-  Telephonist broadcasts events through `Telephonist.Event`. It's possible to 
-  implement custom subscribers, exactly how `Telephonist.Logger` is implemented.
   """
 
   use Application
@@ -115,8 +108,6 @@ defmodule Telephonist do
     children = [
       # Define workers and child supervisors to be supervised
       # worker(Telephonist.Worker, [arg1, arg2, arg3])
-      Telephonist.Event,
-      Telephonist.Logger,
       Telephonist.Storage.ETS,
     ]
 

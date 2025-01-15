@@ -230,12 +230,6 @@ end
 That's it! New calls will start off in `MyStateMachine.initial_state` and
 progress from there. 
 
-### Subscribing to Events
-
-Telephonist publishes events via `GenEvent`. In fact, `Telephonist.Logger` is
-simply a subscriber to these events. Look there for an example of how to
-implement your own subscriber.
-
 ## Other Twilio Libraries
 
 See these other Elixir libraries I've written for Elixir:
